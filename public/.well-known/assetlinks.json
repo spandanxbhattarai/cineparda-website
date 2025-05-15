@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.cineparda",
+      "sha256_cert_fingerprints": [
+        "64:74:11:3E:F7:77:16:66:DC:FF:0A:26:15:5D:58:CF:BB:4D:F3:CA:6C:95:52:26:CE:B9:9E:95:50:27:69:3F"
+      ]
+    }
+  }
+]
