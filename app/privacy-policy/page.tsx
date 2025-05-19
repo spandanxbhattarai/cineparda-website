@@ -86,7 +86,7 @@ export default function PrivacyPolicy() {
             </Head>
 
             {/* Main Content - Full Width */}
-            <main className="w-full px-4 py-20 md:px-8 lg:px-16">
+            <main className="w-full px-4 py-24 md:px-8 lg:px-16">
                 {/* Title Section */}
                 <div className="max-w-6xl mx-auto mb-12">
                     <h1
@@ -112,12 +112,7 @@ export default function PrivacyPolicy() {
                 </div>
             </main>
 
-            {/* Simple Footer */}
-            <div className="w-full py-8 text-center" style={{ borderTop: `1px solid ${colors.border}` }}>
-                <p style={{ color: colors.textLight }}>
-                    {policyData.footer.text.replace('{year}', String(new Date().getFullYear()))}
-                </p>
-            </div>
+         
         </div>
     );
 }

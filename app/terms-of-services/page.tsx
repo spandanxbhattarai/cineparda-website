@@ -327,27 +327,7 @@ export default function TermsOfService() {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer style={{ borderTop: `1px solid ${colors.border}` }} className="py-8">
-        <div className="container mx-auto px-4 max-w-4xl">
-          <div className="flex flex-col md:flex-row justify-between gap-6">
-            <div>
-              <p style={{ color: colors.textLight }} className="mb-2">
-                {policyData.footer.text.replace('{year}', new Date().getFullYear().toString())}
-              </p>
-            </div>
-            <div>
-              <h3 className="text-sm font-medium mb-2" style={{ color: colors.primary }}>Contact Legal</h3>
-              <p className="text-sm" style={{ color: colors.textLight }}>
-                {policyData.footer.contact.email}
-              </p>
-              <p className="text-sm" style={{ color: colors.textLight }}>
-                {policyData.footer.contact.address}
-              </p>
-            </div>
-          </div>
-        </div>
-      </footer>
+     
     </div>
   );
 }
