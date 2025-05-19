@@ -103,7 +103,7 @@ export default function ContactForm() {
           <h3 className="text-xl font-medium mb-4">Contact Information</h3>
           <p className="text-gray-400 mb-6">
             Have questions or need assistance? Our support team is here to help. 
-            Reach out to us and we'll get back to you as soon as possible.
+            Reach out to us and we&apos;ll get back to you as soon as possible.
           </p>
           
           <div className="space-y-4">

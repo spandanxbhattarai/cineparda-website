@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Play, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { continueWatchingItems } from '@/data/movies';
-import { Progress } from '@/components/ui/progress';
+// import { Progress } from '@/components/ui/progress';
 
 export default function ContinueWatching() {
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -86,7 +86,7 @@ export default function ContinueWatching() {
               </Link>
               
               <div className="relative">
-                <Progress value={item.progress} className="h-1 w-full rounded-none" />
+                {/* <Progress value={item.progress} className="h-1 w-full rounded-none" /> */}
                 
                 <div className="p-2 bg-gray-900 flex justify-between items-center">
                   <div className="text-sm font-semibold truncate font-lato">{item.title}</div>

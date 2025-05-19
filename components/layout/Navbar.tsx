@@ -30,8 +30,8 @@ export default function Navbar() {
     { name: 'Home', href: '/' },
     { name: 'Movies', href: '/movies' },
     { name: 'My List', href: '/my-list' },
-    {name: 'Support', href: '/support'},
-    {name: 'Our App', href:'mobile-app'}
+    { name: 'Support', href: '/support' },
+    { name: 'Our App', href: '/mobile-app' }
   ];
 
   return (
@@ -67,9 +67,9 @@ export default function Navbar() {
               <Search className="h-5 w-5" />
             </Button>
             <Link href="/notifications">
-            <Button variant="ghost" size="icon">
-              <Bell className="h-5 w-5" />
-            </Button>
+              <Button variant="ghost" size="icon">
+                <Bell className="h-5 w-5" />
+              </Button>
             </Link>
             <Link href="/profile">
               <Button variant="ghost" size="icon" className="rounded-full">
@@ -115,9 +115,9 @@ export default function Navbar() {
                 <Search className="h-5 w-5" />
               </Button>
               <Link href="/notifications" onClick={() => setMobileMenuOpen(false)}>
-              <Button variant="ghost" size="icon">
-                <Bell className="h-5 w-5" />
-              </Button>
+                <Button variant="ghost" size="icon">
+                  <Bell className="h-5 w-5" />
+                </Button>
               </Link>
               <Link href="/profile" onClick={() => setMobileMenuOpen(false)}>
                 <Button variant="ghost" size="icon">

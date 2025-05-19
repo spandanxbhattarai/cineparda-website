@@ -1,3 +1,4 @@
+"use client"
 import { Suspense } from 'react';
 import LoadingUI from '@/components/ui/loading-ui';
 import MovieBrowse from '@/components/movies/MovieBrowse';

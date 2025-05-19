@@ -17,6 +17,7 @@ const lato = Lato({
   variable: '--font-lato',
 });
 
+
 export const metadata: Metadata = {
   title: 'Cineparda - Stream Movies & TV Shows',
   description: 'Watch the latest movies and TV shows on Cineparda, your premium streaming platform.',
