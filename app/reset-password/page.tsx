@@ -1,10 +1,11 @@
 'use client';
 import { Suspense, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 function ResetPasswordContent() {
     const searchParams = useSearchParams();
     const [password, setPassword] = useState('');
+    const router = useRouter();
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errors, setErrors] = useState({
         password: '',
@@ -16,7 +17,7 @@ function ResetPasswordContent() {
 
     const validatePassword = (value: string) => {
         const strongRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]).{8,}$/;
-        
+
         if (!value) return 'Password is required';
         if (value.length < 8) return 'Password must be at least 8 characters';
         if (!strongRegex.test(value)) {
@@ -30,7 +31,7 @@ function ResetPasswordContent() {
 
         const passwordError = validatePassword(password);
         const confirmError = password !== confirmPassword ? 'Passwords do not match' : '';
-        
+
         setErrors({
             password: passwordError,
             confirmPassword: confirmError,
@@ -44,13 +45,13 @@ function ResetPasswordContent() {
             return;
         }
 
-        const confirmationCode = searchParams.get('confirmation');
-        if (!confirmationCode) {
+        const resetCode = searchParams.get('code');
+        if (!resetCode) {
             setStatus('error');
-            setMessage('Invalid confirmation link');
+            setMessage('Invalid reset link');
             setErrors({
                 ...errors,
-                general: 'Invalid confirmation link'
+                general: 'Invalid reset link'
             });
             return;
         }
@@ -65,7 +66,7 @@ function ResetPasswordContent() {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    confirmation: confirmationCode,
+                    reset: resetCode,
                     newPassword: password,
                     confirmPassword: confirmPassword
                 })
@@ -74,7 +75,22 @@ function ResetPasswordContent() {
             const data = await response.json();
 
             if (!response.ok) {
-                throw new Error(data.message || 'Password reset failed');
+                let errorMessage = 'Password reset failed';
+
+                if (data.message) {
+                    if (typeof data.message === 'string') {
+                        errorMessage = data.message;
+                    } else if (data.message.message) {
+                        errorMessage = data.message.message;
+                    } else if (typeof data.message === 'object') {
+                        errorMessage = JSON.stringify(data.message);
+                    }
+                }
+
+                console.log('Password reset error:', errorMessage);
+                setStatus('error');
+                setMessage(errorMessage);
+                return;
             }
 
             setStatus('success');
@@ -82,26 +98,26 @@ function ResetPasswordContent() {
 
             // Close window after 20 seconds
             setTimeout(() => {
-                window.close();
+                router.push('/');
             }, 20000);
-
         } catch (error) {
+            console.log('Network error:', error);
             setStatus('error');
-            setMessage(error instanceof Error ? error.message : 'An unknown error occurred');
+            setMessage('Network error occurred. Please try again.');
         }
     };
 
     const getPasswordStrength = (password: string) => {
         if (!password) return 0;
         let strength = 0;
-        
+
         // Length contributes up to 40%
         strength += Math.min(password.length / 20, 0.4);
-        
+
         // Character variety contributes up to 60%
         const tests = [/[a-z]/, /[A-Z]/, /[0-9]/, /[^a-zA-Z0-9]/];
         strength += tests.filter(re => re.test(password)).length * 0.15;
-        
+
         return Math.min(strength * 100, 100);
     };
 
@@ -128,12 +144,12 @@ function ResetPasswordContent() {
                         <h1 className="text-2xl font-bold text-white mb-2">Password Reset Successful!</h1>
                         <p className="text-[#A0B3C6] mb-6 text-center">{message}</p>
                         <button
-                            onClick={() => window.close()}
+                            onClick={() => router.push('/')}
                             className="px-8 py-3 bg-gradient-to-r from-[#4A8BF5] to-[#2A6BEF] text-white rounded-full hover:from-[#3A7BE5] hover:to-[#1A5BD5] transition-all transform hover:scale-105 shadow-lg font-medium"
                         >
-                            Close Now
+                            Home
                         </button>
-                        <p className="text-sm text-[#6A8BA6] mt-4">This window will close automatically in 20 seconds</p>
+                        <p className="text-sm text-[#6A8BA6] mt-4">You may now close this window and log in using the app.</p>
                     </div>
                 ) : (
                     <>

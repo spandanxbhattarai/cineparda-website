@@ -4,16 +4,16 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
   try {
-    const { confirmation, newPassword, confirmPassword } = await request.json();
+    const { reset, newPassword, confirmPassword } = await request.json();
     
-    if (!confirmation || !newPassword) {
+    if (!reset || !newPassword) {
       return NextResponse.json(
-        { message: 'Confirmation token and new password are required' },
+        { message: 'Reset token and new password are required' },
         { status: 400 }
       );
     }
     
-    const apiUrl = `https://sandbox-admin.cineparda.com/api/auth/reset-password`;
+   const apiUrl = `${process.env.DEV_ADMIN_DOMAIN}/api/auth/reset-password`;
     
     const response = await fetch(apiUrl, {
       method: 'POST', 
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        code: confirmation,
+        code: reset,
         password: newPassword,
         passwordConfirmation: confirmPassword
       })
